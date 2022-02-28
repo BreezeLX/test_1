@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/vue.js"></script>
+    <style>
+        li {
+            list-style: none;
+            border-bottom: 1px solid #000;
+        }
+
+        .checked {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" placeholder="请输入名字" v-model="keyWord">
+        <button @click="sortType = 2">价格升序</button>
+        <button @click="sortType = 1">价格降序</button>
+        <button @click="sortType = 0">原顺序</button>
+        <ul>
+            <li v-for="(p,index) of filPerons" :key="p.id">
+                {{p.carName}}-{{p.price}}元
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            keyWord: '',
+            sortType: 0, //0原顺序 1降序 2升序
+            persons: [
+                { id: 001, carName: '宝马', price: 15000 },
+                { id: 002, carName: '保时捷', price: 20000 },
+                { id: 003, carName: '法拉利', price: 99999990 },
+                { id: 004, carName: '劳斯莱斯', price: 1000000000 },
+                { id: 005, carName: '兰博基尼', price: 234535545 },
+                { id: 006, carName: '大众', price: 10000 }
+            ]
+
+        },
+        computed: {
+            filPerons() {
+                let arr = this.persons.filter((p) => {
+                    return p.carName.indexOf(this.keyWord) !== -1
+                })
+                if (sortType == 1) {
+
+                }
+                return arr;
+            }
+        }
+    })
+    console.log(vm)
+
+
+</script>
+
+</html>

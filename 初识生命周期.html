@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表单数据</title>
+    <script src="/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2 v-if='a'>你好啊</h2>
+        <h1 :style='{opacity}' @click='change'>时间就是金钱</h1>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#root',
+        data: {
+            a: false,
+            opacity: 1
+        },
+        methods: {
+            change() {
+
+            }
+        },
+        //Vue完成模板的解析把真实dom元素放入页面后调用mounted
+        mounted() {
+            setInterval(() => { //这里之所以能用箭头函数是因为箭头函数往外找到的第一个函数是指向vue实例
+                console.log(this);
+                this.opacity -= 0.01;
+                if (this.opacity <= 0) this.opacity = 1;
+            }, 16)
+        },
+    })
+    setInterval(function () {
+        // vm.opacity -= 0.01;
+        if (vm.opacity <= 0) vm.opacity = 1;
+    }, 16)
+</script>
+
+</html>
